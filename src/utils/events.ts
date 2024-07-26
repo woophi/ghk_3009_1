@@ -15,7 +15,7 @@ export const sendDataToGA = async (choice: string) => {
       {
         redirect: 'follow',
         method: 'POST',
-        body: JSON.stringify({ date, choice, variant: '3008_1' }),
+        body: JSON.stringify({ date, choice, variant: '3009_1' }),
         headers: {
           'Content-Type': 'text/plain;charset=utf-8',
         },

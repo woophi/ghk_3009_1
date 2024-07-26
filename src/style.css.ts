@@ -17,8 +17,10 @@ const bottomBtn = style({
 const container = style({
   display: 'flex',
   padding: '21px',
-  flexDirection: 'column',
-  gap: '12px',
+  alignItems: 'center',
+  gap: '16px',
+  backgroundColor: '#000000',
+  color: '#FFFFFFF0',
 });
 
 const imgBg = recipe({

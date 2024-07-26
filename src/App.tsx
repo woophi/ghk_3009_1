@@ -1,15 +1,18 @@
 import { ButtonMobile } from '@alfalab/core-components/button/mobile';
 import { CDNIcon } from '@alfalab/core-components/cdn-icon';
 import { Typography } from '@alfalab/core-components/typography';
+import Lottie from 'lottie-react';
 import { useCallback, useState } from 'react';
 import current from './assets/current.png';
 import empty from './assets/empty.png';
 import lesscolors from './assets/lesscolors.png';
 import min from './assets/min.png';
 import noimgs from './assets/noimgs.png';
+import scrollAnimation from './assets/scroll.json';
 import { LS, LSKeys } from './ls';
 import { appSt } from './style.css';
 import { ThxLayout } from './thx/ThxLayout';
+import { sendDataToGA } from './utils/events';
 
 const vars = [
   {
@@ -49,13 +52,11 @@ export const App = () => {
       return;
     }
     setLoading(true);
-    setThx(true);
-    setLoading(false);
-    // sendDataToGA(choice).then(() => {
-    //   LS.setItem(LSKeys.ShowThx, true);
-    //   setThx(true);
-    //   setLoading(false);
-    // });
+    sendDataToGA(selectedVariant.title).then(() => {
+      LS.setItem(LSKeys.ShowThx, true);
+      setThx(true);
+      setLoading(false);
+    });
   }, [selectedVariant, isEmpty]);
 
   if (thxShow) {
@@ -65,9 +66,10 @@ export const App = () => {
   return (
     <>
       <div className={appSt.container}>
-        <Typography.TitleResponsive tag="h1" view="medium" font="system" weight="medium">
-          Выберите вариант оформления главного экрана
+        <Typography.TitleResponsive tag="h1" view="xsmall" font="system" weight="medium">
+          Скрольте и выберите вариант оформления экрана
         </Typography.TitleResponsive>
+        <Lottie animationData={scrollAnimation} loop width={50} height={50} />
       </div>
       <img src={selectedVariant.img} className={appSt.imgBg({ isEmpty })} />
       <div style={{ height: '170px' }} />
